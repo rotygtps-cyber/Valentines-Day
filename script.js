@@ -45,6 +45,7 @@ const flowerPopupLayer = document.getElementById('flower-popup-layer');
 let currentThemeIndex = 0;
 const themes = ['', 'theme-red', 'theme-violet', 'theme-gold'];
 let flowersClicked = 0;
+let isLetterOpen = false; // BUG FIX: Track if letter is already opened
 
 /* --- INITIALIZATION --- */
 window.addEventListener('DOMContentLoaded', () => {
@@ -134,8 +135,12 @@ closeMemory.addEventListener('click', () => {
     memoryModal.classList.add('hidden');
 });
 
-// 5. Letter & Real Flowers Sequence (Step 3) - FIXED LOGIC
+// 5. Letter & Real Flowers Sequence (Step 3) - BUG FIXED HERE
 openLetterBtn.addEventListener('click', () => {
+    // FIX: Check if already opened. If yes, stop here.
+    if (isLetterOpen) return;
+    isLetterOpen = true; // Lock it immediately
+
     document.querySelector('.envelope').classList.add('open');
     
     // 1. Trigger Flower Popup
